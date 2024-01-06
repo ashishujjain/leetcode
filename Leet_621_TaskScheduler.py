@@ -79,7 +79,7 @@ class Leet_621_TaskScheduler:
         # define a frequency dictonary to have task and its frequency count
         print ("")
         print ("Tasks = ",tasks)
-        print ("Cool Down period which is n =", n)
+        print ("Cool Down period which is n (n = ideal time between the task) =", n)
         tasklength = len(tasks)
         if n == 0:
             return tasklength
@@ -93,18 +93,19 @@ class Leet_621_TaskScheduler:
         
         print ("frequency of the each task=", freq)
         #print ("freq.items = ", freq.items())
-        #freq = [value for key, value in freq.items()]
+
+        #only_freq = [value for key, value in freq.items()]
         only_freq = []
         for value in freq.values():
             only_freq.append(value)
 
-        print ("frequency count of each task=", only_freq)
+        print ("frequency count of each task in a array list = ", only_freq)
         #print ("frequency count of each task=", freq)
         max_freq = max(only_freq)
-        print ("Highest frequency count of the task =", max_freq)
+        print ("max_freq (Highest frequency count of the task) = ", max_freq)
         
         max_freq_tasks = only_freq.count(max_freq)
-        print ("Highest frequency task =", max_freq_tasks)
+        print ("max_freq_tasks (Highest frequency task) = ", max_freq_tasks)
         
         
         # formula is as below
@@ -117,14 +118,11 @@ class Leet_621_TaskScheduler:
         # least task time = total group * items or elements  in the group +  task count with higest frequency
         # least task time = (highest frequency - 1) * ( n + 1) +  number of task with higest frequency
 
+        print ("leasttasktime = (max_freq - 1) * (n + 1) + max_freq_tasks")
         leasttasktime = (max_freq - 1) * (n + 1) + max_freq_tasks
-        
-
         print ("leasttasktime:", leasttasktime)
         print ("tasklength:", tasklength)
-
         return max(tasklength, leasttasktime)
-        #return leasttasktime
 
 if __name__=="__main__":
     leet_621 = Leet_621_TaskScheduler()
