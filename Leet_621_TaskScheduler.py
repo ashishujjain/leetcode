@@ -100,13 +100,14 @@ class Leet_621_TaskScheduler:
 
         return max(tasklenght, leasttasktime)
 
-print (Leet_621_TaskScheduler().leastInterval(["A","A","A","B","B","B"], 2))
-print (Leet_621_TaskScheduler().leastInterval(["A","A","A","B","B","B","B"], 2))
-print (Leet_621_TaskScheduler().leastInterval(["A","A","A","B","B","B"], 0))
-print (Leet_621_TaskScheduler().leastInterval(["A","A","A","A","A","A","B","C","D","E","F","G"], 2))
-print ("")
-print (Leet_621_TaskScheduler().leastInterval_1(["A","A","A","B","B","B"], 2))
-print (Leet_621_TaskScheduler().leastInterval_1(["A","A","A","B","B","B","B"], 2))
-print (Leet_621_TaskScheduler().leastInterval_1(["A","A","A","B","B","B"], 0))
-print (Leet_621_TaskScheduler().leastInterval_1(["A","A","A","A","A","A","B","C","D","E","F","G"], 2))
+if __name__=="__main__":
+    print (Leet_621_TaskScheduler().leastInterval(["A","A","A","B","B","B"], 2))
+    print (Leet_621_TaskScheduler().leastInterval(["A","A","A","B","B","B","B"], 2))
+    print (Leet_621_TaskScheduler().leastInterval(["A","A","A","B","B","B"], 0))
+    print (Leet_621_TaskScheduler().leastInterval(["A","A","A","A","A","A","B","C","D","E","F","G"], 2))
+    print ("")
+    print (Leet_621_TaskScheduler().leastInterval_1(["A","A","A","B","B","B"], 2))
+    print (Leet_621_TaskScheduler().leastInterval_1(["A","A","A","B","B","B","B"], 2))
+    print (Leet_621_TaskScheduler().leastInterval_1(["A","A","A","B","B","B"], 0))
+    print (Leet_621_TaskScheduler().leastInterval_1(["A","A","A","A","A","A","B","C","D","E","F","G"], 2))
         
