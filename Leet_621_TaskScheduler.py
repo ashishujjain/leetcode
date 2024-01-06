@@ -46,9 +46,11 @@ The integer n is in the range [0, 100]. """
 from collections import deque
 import heapq
 from typing import Counter, List
-
+import time
+from memory_profiler import profile
 
 class Leet_621_TaskScheduler:
+    #@profile
     def leastInterval(self, tasks: List[str], n: int) -> int:
         # each task 1 unit time
         # minmize idle time
@@ -70,7 +72,8 @@ class Leet_621_TaskScheduler:
                 heapq.heappush(maxHeap, q.popleft()[0])
         return time
     
-    #
+
+    #@profile
     def leastInterval_1(self, tasks: List[str], n: int) -> int:
         # define a frequency dictonary to have task and its frequency count
         freq = {}
