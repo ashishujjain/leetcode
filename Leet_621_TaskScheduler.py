@@ -5,7 +5,8 @@ Given a characters array tasks, representing the tasks a CPU needs to do, where 
 Tasks could be done in any order. Each task is done in one unit of time. 
 For each unit of time, the CPU could complete either one task or just be idle.
 
-However, there is a non-negative integer n that represents the cooldown period between two same tasks (the same letter in the array), that is that there must be at least n units of time between any two same tasks.
+However, there is a non-negative integer n that represents the cooldown period between two same tasks (the same letter in the array), 
+that is that there must be at least n units of time between any two same tasks.
 
 Return the least number of units of times that the CPU will take to finish all the given tasks.
 
@@ -76,29 +77,54 @@ class Leet_621_TaskScheduler:
     #@profile
     def leastInterval_1(self, tasks: List[str], n: int) -> int:
         # define a frequency dictonary to have task and its frequency count
+        print ("")
+        print ("Tasks = ",tasks)
+        print ("Cool Down period which is n =", n)
+        tasklength = len(tasks)
+        if n == 0:
+            return tasklength
+        
         freq = {}
         for task in tasks:
             if task not in freq:
                 freq[task] = 1
             else:
                 freq[task] += 1
-        print ("frequency=", freq)
-        freq = [value for key, value in freq.items()]
-        print ("Highest frequency=", freq)
-        max_freq = max(freq)
-        print ("Highest frequency count =", max_freq)
         
-        max_freq_tasks = freq.count(max_freq)
+        print ("frequency of the each task=", freq)
+        #print ("freq.items = ", freq.items())
+        #freq = [value for key, value in freq.items()]
+        only_freq = []
+        for value in freq.values():
+            only_freq.append(value)
+
+        print ("frequency count of each task=", only_freq)
+        #print ("frequency count of each task=", freq)
+        max_freq = max(only_freq)
+        print ("Highest frequency count of the task =", max_freq)
+        
+        max_freq_tasks = only_freq.count(max_freq)
         print ("Highest frequency task =", max_freq_tasks)
         
+        
         # formula is as below
+        # least task time = total group * items in a group +  task count with higest frequency
+        # [["A","A","A","B","B","B","B"], 2
+        # [B A _, B A _, B A _, B] total 3 groups and each group has 3 elelments + highest task count with higest frequency
+        # least task time = (max frequency of the task - 1) * (ideal cycle count, + 1) +  task count with higest frequency
+        # ["A","A","A","B","B","B"], 2
+        # [B A _, B A _, B A] total 3 groups and each group has 3 elelments + highest task count with higest frequency
+        # least task time = total group * items or elements  in the group +  task count with higest frequency
+        # least task time = (highest frequency - 1) * ( n + 1) +  number of task with higest frequency
+
         leasttasktime = (max_freq - 1) * (n + 1) + max_freq_tasks
-        tasklenght = len(tasks)
+        
 
         print ("leasttasktime:", leasttasktime)
-        print ("tasklenght:", tasklenght)
+        print ("tasklength:", tasklength)
 
-        return max(tasklenght, leasttasktime)
+        return max(tasklength, leasttasktime)
+        #return leasttasktime
 
 if __name__=="__main__":
     leet_621 = Leet_621_TaskScheduler()
@@ -106,9 +132,11 @@ if __name__=="__main__":
     print (leet_621.leastInterval(["A","A","A","B","B","B","B"], 2))
     print (leet_621.leastInterval(["A","A","A","B","B","B"], 0))
     print (leet_621.leastInterval(["A","A","A","A","A","A","B","C","D","E","F","G"], 2))
+    print (leet_621.leastInterval(["A","A","A","B","B","B", "C","C","C", "D", "D", "E"], 2))
     print ("")
     print (leet_621.leastInterval_1(["A","A","A","B","B","B"], 2))
     print (leet_621.leastInterval_1(["A","A","A","B","B","B","B"], 2))
     print (leet_621.leastInterval_1(["A","A","A","B","B","B"], 0))
     print (leet_621.leastInterval_1(["A","A","A","A","A","A","B","C","D","E","F","G"], 2))
+    print (leet_621.leastInterval_1(["A","A","A","B","B","B", "C","C","C", "D", "D", "E"], 2))
         
