@@ -1,4 +1,6 @@
 """ 621. Task Scheduler
+youtube link : https://www.youtube.com/watch?v=Z2Plc8o1ld4
+
 Medium
 
 Given a characters array tasks, representing the tasks a CPU needs to do, where each letter represents a different task. 
