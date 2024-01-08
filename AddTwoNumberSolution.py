@@ -1,5 +1,24 @@
 #https://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-list/
 
+class Node:
+	def __init__(self, data):
+		self.data = data
+		self.next = None
+		
+class LinkedList:
+	def __init__(self):
+		self.head = None
+		self.tail = None
+
+	def insert(self, val):
+		if self.head is None:
+			self.head = Node(val)
+			self.tail = self.head
+		else:
+			self.tail.next = Node(val)
+			self.tail = self.tail.next
+
+
 class AddTwoNumberSolution:
 	# Function to reverse a list
 	def reverse(self, head):
@@ -74,29 +93,7 @@ class AddTwoNumberSolution:
 		#ans = self.reverse(res)
 		return res
 
-
-class Node:
-	def __init__(self, data):
-		self.data = data
-		self.next = None
-
-
-class LinkedList:
-	def __init__(self):
-		self.head = None
-		self.tail = None
-
-	def insert(self, val):
-		if self.head is None:
-			self.head = Node(val)
-			self.tail = self.head
-		else:
-			self.tail.next = Node(val)
-			self.tail = self.tail.next
-
 # Utility function to print the list
-
-
 def printList(n):
 	while n:
 		print(n.data, end = ' ')
