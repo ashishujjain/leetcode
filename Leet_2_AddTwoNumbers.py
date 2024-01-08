@@ -33,11 +33,24 @@ It is guaranteed that the list represents a number that does not have leading ze
 from typing import Optional
 
 # Definition for singly-linked list.
-class ListNode:
-     def __init__(self, val=0, next=None):
+class ListNode: # defined in leet code execution
+    def __init__(self, val=0, next=None):
          self.val = val
          self.next = next
 
+class LinkedList: # defined in leet code execution
+	def __init__(self):
+		self.head = None
+		self.tail = None
+
+	def insert(self, val):
+		if self.head is None:
+			self.head = ListNode(val)
+			self.tail = self.head
+		else:
+			self.tail.next = ListNode(val)
+			self.tail = self.tail.next
+               
 class AddTwoNumbers:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         dummy = ListNode()
@@ -50,19 +63,104 @@ class AddTwoNumbers:
 
             #new digit
             val = v1 + v2 + carry
-            carry = val // 10
-            val = val % 10
+            #15
+            carry = val // 10 # divide
+            val = val % 10 # mod formula
             cur.next = ListNode(val)
 
             #update ptrs
             cur = cur.next
             l1 = l1.next if l1 else None
             l2 = l2.next if l2 else None 
-            
+        # 8 + 7
         return dummy.next
 
+# Utility function to print the list
+# Not needed in leet code execution
+def printList(n):
+	while n:
+		print(n.val, end = ' ')
+		n = n.next
+	print()
 
-l1 = [2,4,3] 
-l2 = [5,6,4]
-s = AddTwoNumbers()
-print(s.addTwoNumbers(l1, l2)) 
+# Driver Code
+if __name__ == "__main__":
+	arr1 = [2,4,3]  # Need to convert the array to ListNode
+	LL1 = LinkedList()
+	for i in arr1:
+		LL1.insert(i)
+	print("First list is", end = " ")
+	printList(LL1.head)
+
+	arr2 = [5,6,4] # Need to convert the array to ListNode
+	LL2 = LinkedList()
+	for i in arr2:
+		LL2.insert(i)
+	print("Second list is", end = " ")
+	printList(LL2.head)
+
+	# Function Call
+	res = AddTwoNumbers().addTwoNumbers(LL1.head, LL2.head) # ListNode is required to be passed.
+	print("Resultant list is", end = " ")
+	printList(res)
+	print ("")
+
+	arr1 = [7, 5, 9, 4, 6]
+	LL1 = LinkedList()
+	for i in arr1:
+		LL1.insert(i)
+	print("First list is", end = " ")
+	printList(LL1.head)
+
+	arr2 = [8, 4]
+	LL2 = LinkedList()
+	for i in arr2:
+		LL2.insert(i)
+	print("Second list is", end = " ")
+	printList(LL2.head)
+
+	# Function Call
+	res = AddTwoNumbers().addTwoNumbers(LL1.head, LL2.head)
+	print("Resultant list is", end = " ")
+	printList(res)
+	print ("")
+
+	arr1 = [0]
+	LL1 = LinkedList()
+	for i in arr1:
+		LL1.insert(i)
+	print("First list is", end = " ")
+	printList(LL1.head)
+
+	arr2 = [0]
+	LL2 = LinkedList()
+	for i in arr2:
+		LL2.insert(i)
+	print("Second list is", end = " ")
+	printList(LL2.head)
+
+	# Function Call
+	res = AddTwoNumbers().addTwoNumbers(LL1.head, LL2.head)
+	print("Resultant list is", end = " ")
+	printList(res)
+	print ("")
+
+	arr1 = [9,9,9,9,9,9,9]
+	LL1 = LinkedList()
+	for i in arr1:
+		LL1.insert(i)
+	print("First list is", end = " ")
+	printList(LL1.head)
+
+	arr2 = [9,9,9,9]
+	LL2 = LinkedList()
+	for i in arr2:
+		LL2.insert(i)
+	print("Second list is", end = " ")
+	printList(LL2.head)
+
+	# Function Call
+	res = AddTwoNumbers().addTwoNumbers(LL1.head, LL2.head)
+	print("Resultant list is", end = " ")
+	printList(res)
+	print ("")
