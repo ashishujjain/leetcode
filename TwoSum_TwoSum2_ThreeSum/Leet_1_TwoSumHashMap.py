@@ -1,5 +1,10 @@
 """ 1. Two Sum
+
+https://www.youtube.com/watch?v=KLlXCFG5TnA
+https://neetcode.io/roadmap (Array and Hashing)
+
 Easy
+
 Hint
 Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 
@@ -50,14 +55,14 @@ class Leet_1_TwoSum:
                 return [i, numMap[complement]]
         return []
     
-    def onepasshashtbale(self, nums, target):
-        numMap = {}
+    def onepasshashtbale(self, nums: List[int], target: int) -> List[int]:
+        numMap_to_store_key_value = {}
         for i, num in enumerate(nums):
-            complement = target - num
-            if complement in numMap:
-                return [numMap[complement], i]
-            numMap[num] = i
-        return []
+            difference = target - num # find the difference and check that difference is part of numMap_to_store_key_value
+            if difference in numMap_to_store_key_value:
+                return [numMap_to_store_key_value[difference], i]
+            else:
+                numMap_to_store_key_value[num] = i
     
 # Time Complexity is O(n2)
 print (Leet_1_TwoSum().twoSum([2,7,11,15], 9))
@@ -75,5 +80,6 @@ print ("# onepasshashtbale Time complexity is O(n)")
 print (Leet_1_TwoSum().onepasshashtbale([2,7,11,15], 9))
 print (Leet_1_TwoSum().onepasshashtbale([3,2,4], 6))
 print (Leet_1_TwoSum().onepasshashtbale([3,3], 6))
+print (Leet_1_TwoSum().onepasshashtbale([3,4,0], 3))
 
 # https://medium.com/@AlexanderObregon/solving-the-two-sum-problem-on-leetcode-python-answer-s-walkthrough-f0c737fb3648
