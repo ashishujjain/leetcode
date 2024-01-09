@@ -27,7 +27,9 @@ Constraints:
 s consists of only uppercase English letters.
 0 <= k <= s.length """
 
-from typing import defaultdict
+
+from collections import defaultdict
+
 
 class LongRepeatingCharReplacement:
     def characterReplacement(self, s: str, k: int) -> int:
