@@ -1,5 +1,10 @@
 """ 621. Task Scheduler
+
+https://leetcode.com/problems/task-scheduler/description/
+
 youtube link : https://www.youtube.com/watch?v=Z2Plc8o1ld4
+               https://www.youtube.com/watch?v=l6-y7MrHLB8
+
 
 Medium
 
@@ -54,21 +59,28 @@ from memory_profiler import profile
 
 class Leet_621_TaskScheduler:
     #@profile
-    def leastInterval(self, tasks: List[str], n: int) -> int:
+    def leastInterval(self, tasks: List[str], n: int) -> int:  # complex to understand, require understanding of Heap and deque.
         # each task 1 unit time
         # minmize idle time
-        count = Counter(tasks)
-        maxHeap = [-cnt for cnt in count.values()]
+        count = Counter(tasks)  # This will creat a dictonary with key value pair, meaning Task and it's frequency . Example {'A':3, 'B': 3}, length is 2
+    
+        maxHeap = [-cnt for cnt in count.values()]  # this will create an array with negative number [-3, -3]
+        #print("The created heap is : ", end="")
+        #print(maxHeap) 
         heapq.heapify(maxHeap)
-
+        #print("The created heap is : ", end="")
+        #print(maxHeap) 
         time = 0
         q = deque() # pairs of [-cnt, idleTime]
+        #print("deque : ", end="")
+        #print(q) 
 
         while maxHeap or q:
             time += 1
-
             if maxHeap:
                 cnt = 1 + heapq.heappop(maxHeap)
+                #print("cnt : ", end="")
+                #print(cnt)
                 if cnt:
                     q.append([cnt, time + n])
             if q and q[0][1] == time:
@@ -85,29 +97,34 @@ class Leet_621_TaskScheduler:
         tasklength = len(tasks)
         if n == 0:
             return tasklength
-        
-        freq = {}
-        for task in tasks:
-            if task not in freq:
-                freq[task] = 1
-            else:
-                freq[task] += 1
-        
-        print ("frequency of the each task=", freq)
-        #print ("freq.items = ", freq.items())
+        #freq = {}
+        #for task in tasks:
+        #    if task not in freq:
+        #        freq[task] = 1
+        #    else:
+        #        freq[task] += 1
 
-        #only_freq = [value for key, value in freq.items()]
-        only_freq = []
-        for value in freq.values():
-            only_freq.append(value)
+        freq = Counter(tasks)   # this is one liner to save time and extra lines as above commented lines
+        
+
+        print ("frequency of the each task=", freq)
+        
+        #print ("freq.items = ", freq.items())
+        
+        #only_freq = []
+        #for value in freq.values():
+        #    only_freq.append(value)
+
+        only_freq = [value for key, value in freq.items()]
+        #only_freq = [cnt for cnt in freq.values()]
 
         print ("frequency count of each task in a array list = ", only_freq)
         #print ("frequency count of each task=", freq)
         max_freq = max(only_freq)
         print ("max_freq (Highest frequency count of the task) = ", max_freq)
         
-        max_freq_tasks = only_freq.count(max_freq)
-        print ("max_freq_tasks (Highest frequency task) = ", max_freq_tasks)
+        max_freq_tasks_groups = only_freq.count(max_freq) # find the Count of tasks has the max frequency.
+        print ("max_freq_tasks_groups (Highest frequency task) = ", max_freq_tasks_groups)
         
         
         # formula is as below
@@ -121,22 +138,70 @@ class Leet_621_TaskScheduler:
         # least task time = (highest frequency - 1) * ( n + 1) +  number of task with higest frequency
 
         print ("leasttasktime = (max_freq - 1) * (n + 1) + max_freq_tasks")
-        leasttasktime = (max_freq - 1) * (n + 1) + max_freq_tasks
+        leasttasktime = (max_freq - 1) * (n + 1) + max_freq_tasks_groups
         print ("leasttasktime:", leasttasktime)
         print ("tasklength:", tasklength)
         return max(tasklength, leasttasktime)
+    
+
+    def leastInterval_greedy_algorithm(self, tasks: List[str], n: int) -> int:
+        # define a frequency dictonary to have task and its frequency count
+        print ("")
+        print ("Tasks = ",tasks)
+        print ("Cool Down period which is n (n = ideal time between the task) =", n)
+        tasklength = len(tasks)
+        if n == 0:
+            return tasklength
+        """ freq = {}
+        for task in tasks:
+            if task not in freq:
+                freq[task] = 1
+            else:
+                freq[task] += 1 """
+        freq = Counter(tasks)   # this is one liner to save time and extra lines as above commented lines
+        print ("frequency of the each task=", freq)
+        """ only_freq = []
+        for value in freq.values():
+            only_freq.append(value) """
+        
+        only_freq = [value for key, value in freq.items()] 
+        only_freq.sort(reverse=True) # as we have to remove frequency used to calculate the Max CPU Idle time
+        print ("frequency count of each task in a array list = ", only_freq)
+        max_freq = max(only_freq) 
+        print ("max_freq (Highest frequency count of the task) = ", max_freq)
+        MaxcpuIdleTime = (max_freq - 1) * n
+        print ("CPU idle time with the start of processing = ", MaxcpuIdleTime)
+        for i, freq in enumerate(only_freq):
+            if i == 0:
+                continue
+            MaxcpuIdleTime -= min(max_freq - 1, only_freq[i])
+        print ("CPU idle time after processing the tasks = ", MaxcpuIdleTime)
+        return max(tasklength, tasklength+MaxcpuIdleTime) # max of two value is required as if the cpu idle time goes below length of the task, which is wrong.
+        #return tasklength+MaxcpuIdleTime   # This will fail certain test cases.
+
 
 if __name__=="__main__":
     leet_621 = Leet_621_TaskScheduler()
     print (leet_621.leastInterval(["A","A","A","B","B","B"], 2))
     print (leet_621.leastInterval(["A","A","A","B","B","B","B"], 2))
     print (leet_621.leastInterval(["A","A","A","B","B","B"], 0))
+    print (leet_621.leastInterval(["A","A","A","B","B","B","C","C","C","D","D","E"], 2))
     print (leet_621.leastInterval(["A","A","A","A","A","A","B","C","D","E","F","G"], 2))
-    print (leet_621.leastInterval(["A","A","A","B","B","B", "C","C","C", "D", "D", "E"], 2))
-    print ("")
+    print (leet_621.leastInterval(["A","B","A","B","A","B"], 2))
+    
+    print ("================================================================================")
     print (leet_621.leastInterval_1(["A","A","A","B","B","B"], 2))
     print (leet_621.leastInterval_1(["A","A","A","B","B","B","B"], 2))
     print (leet_621.leastInterval_1(["A","A","A","B","B","B"], 0))
+    print (leet_621.leastInterval_1(["A","A","A","B","B","B","C","C","C","D","D","E"], 2))
     print (leet_621.leastInterval_1(["A","A","A","A","A","A","B","C","D","E","F","G"], 2))
-    print (leet_621.leastInterval_1(["A","A","A","B","B","B", "C","C","C", "D", "D", "E"], 2))
+    print (leet_621.leastInterval_1(["A","B","A","B","A","B"], 2))
+
+    print ("======================================================================================")
+    print (leet_621.leastInterval_greedy_algorithm(["A","A","A","B","B","B"], 2))
+    print (leet_621.leastInterval_greedy_algorithm(["A","A","A","B","B","B","B"], 2))
+    print (leet_621.leastInterval_greedy_algorithm(["A","A","A","B","B","B"], 0))
+    print (leet_621.leastInterval_greedy_algorithm(["A","A","A","B","B","B","C","C","C","D","D", "E"], 2))
+    print (leet_621.leastInterval_greedy_algorithm(["A","A","A","A","A","A","B","C","D","E","F","G"], 2))
+    print (leet_621.leastInterval_greedy_algorithm(["A","B","A","B","A","B"], 2))
         

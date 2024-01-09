@@ -102,6 +102,7 @@ if __name__=="__main__":
     Output = [0,2,3,1]
     #tasks = [[3,2],[1,2],[2,4],[4,1]]
     result = leet_1834.getOrder(tasks)
+    print ("Given Task Order:" ,tasks)
     if result == Output:
         print ("OutPut getOrder:" ,result)
     
@@ -113,6 +114,7 @@ if __name__=="__main__":
     tasks = [[3,2],[1,2],[2,4],[4,1]]
     Output = [1, 0, 3, 2]
     result = leet_1834.getOrder(tasks)
+    print ("Given Task Order:" ,tasks)
     if result == Output:
         print ("OutPut getOrder:" ,result)
     
@@ -136,6 +138,7 @@ if __name__=="__main__":
     tasks = [[1,2],[10,4],[14,2],[14,1]]
     Output = [0,1,3,2]
     result = leet_1834.getOrder(tasks)
+    print ("Given Task Order:" ,tasks)
     if result == Output:
         print ("OutPut getOrder:" ,result)
     

@@ -38,7 +38,7 @@ from typing import List
 
 class ThreesumLeetcode15:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        res = []
+        result = []
         nums.sort() # Sorting is good refer TwoSum|| for reasons, Sorting helps to eleminate the duplicates.
         # Using TwoSum2 logic to solve the problem
         for index, value in enumerate(nums): #iterate over the list and get the index and value
@@ -53,11 +53,11 @@ class ThreesumLeetcode15:
                 elif threeSum < 0:
                     leftPointer += 1 # increment the pointer
                 else:
-                    res.append([value, nums[leftPointer], nums[rightPointer]]) #storing value in the result array.
+                    result.append([value, nums[leftPointer], nums[rightPointer]]) #storing value in the result array.
                     leftPointer += 1 # Incrementing the leftpointer
                     while nums[leftPointer] == nums[leftPointer -1] and leftPointer < rightPointer: # checking the duplicate value and incremeting the leftpointer
                         leftPointer +=1
-        return res
+        return result
 
 print (ThreesumLeetcode15().threeSum([-1,0,1,2,-1,-4]))
 print (ThreesumLeetcode15().threeSum([0,1,1]))
