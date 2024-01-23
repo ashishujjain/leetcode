@@ -1,4 +1,9 @@
 """ 70. Climbing Stairs
+https://leetcode.com/problems/climbing-stairs/description/
+
+https://www.youtube.com/watch?v=UUaMrNOvSqg
+https://www.youtube.com/watch?v=Y0lT9Fck7qI
+
 
 Easy
 
@@ -33,6 +38,7 @@ Constraints:
 
 class Leet_70_ClimbingStairs:
     def climbStairs(self, n: int) -> int:
+        if n ==1: return 1
         one, two = 1, 1
         for i in range (n-1):
             temp = one
@@ -44,5 +50,5 @@ print (Leet_70_ClimbingStairs().climbStairs(5))
 print (Leet_70_ClimbingStairs().climbStairs(2))
 print (Leet_70_ClimbingStairs().climbStairs(3))
 print (Leet_70_ClimbingStairs().climbStairs(1))
-
+print (Leet_70_ClimbingStairs().climbStairs(8))
 

@@ -1,5 +1,8 @@
 """ 
 647. Palindromic Substrings
+https://leetcode.com/problems/palindromic-substrings/
+
+
 Medium
 
 
@@ -34,8 +37,8 @@ class CountSubstringPalindrome:
     def countSubstrings(self, s: str) -> int:
         res = 0
         for i in range(len(s)):
-            res += self.countPlai (s, i, i)
-            res += self.countPlai (s, i, i+1)
+            res += self.countPlai (s, i, i) # checking for ODD
+            res += self.countPlai (s, i, i+1) # Checking for EVEN
         return res
     
     def countPlai(self, s, l, r):
@@ -48,3 +51,5 @@ class CountSubstringPalindrome:
     
 
 print (CountSubstringPalindrome().countSubstrings("aaab"))
+print (CountSubstringPalindrome().countSubstrings("abc"))
+print (CountSubstringPalindrome().countSubstrings("aaa"))

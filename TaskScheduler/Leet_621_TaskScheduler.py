@@ -4,6 +4,7 @@ https://leetcode.com/problems/task-scheduler/description/
 
 youtube link : https://www.youtube.com/watch?v=Z2Plc8o1ld4
                https://www.youtube.com/watch?v=l6-y7MrHLB8
+               https://www.youtube.com/watch?v=s8p8ukTyA2I&t=1s
 
 
 Medium

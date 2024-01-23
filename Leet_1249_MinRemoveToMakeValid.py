@@ -1,4 +1,7 @@
 """ 1249. Minimum Remove to Make Valid Parentheses
+https://www.youtube.com/watch?v=q_nOlpy_VSo
+https://www.youtube.com/watch?v=sClFsx12VgM
+
 
 Given a string s of '(' , ')' and lowercase English characters.
 
@@ -51,6 +54,32 @@ class MinRemoveToMakeValid:
             S[j] = ""
         return "".join(S)
     
+    def minRemoveToMakeStack(self, s: str) -> str:
+        stack, opened, closed = [], 0 ,0
+        for c in s:
+            if c == "(":
+                opened += 1
+                stack.append(c)
+            elif c == ')':
+                if closed < opened:
+                    closed += 1
+                    stack.append(c)
+            else:
+                stack.append(c)
+        res, opened, closed = "", 0 ,0
+        while stack:
+            c = stack.pop()
+            if c == '(':
+                if opened < closed:
+                    opened += 1
+                    res += c
+            elif c == ')':
+                closed += 1
+                res += c
+            else:
+                res += c
+        return res
+    
     def minRemoveToMakeValid_1(self, s: str) -> str:
         stack = []
         final = list(s)
@@ -62,19 +91,20 @@ class MinRemoveToMakeValid:
                     stack.pop()
                 else:
                     final[i] = ''
-
         for index in stack:
             final[index] = ''
-
         return ''.join(final)
 
 
 print (MinRemoveToMakeValid().minRemoveToMakeValid("lee(t(c)o)de)"))
 print (MinRemoveToMakeValid().minRemoveToMakeValid_1("lee(t(c)o)de)"))
-
+print (MinRemoveToMakeValid().minRemoveToMakeStack("lee(t(c)o)de)"))
+print ("=======================================================")
 print (MinRemoveToMakeValid().minRemoveToMakeValid("a)b(c)d"))
 print (MinRemoveToMakeValid().minRemoveToMakeValid_1("a)b(c)d"))
-
+print (MinRemoveToMakeValid().minRemoveToMakeStack("a)b(c)d"))
+print ("=======================================================")
 print (MinRemoveToMakeValid().minRemoveToMakeValid("))(("))
 print (MinRemoveToMakeValid().minRemoveToMakeValid_1("))(("))
+print (MinRemoveToMakeValid().minRemoveToMakeStack("))(("))
 

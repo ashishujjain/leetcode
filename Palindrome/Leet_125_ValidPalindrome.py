@@ -1,4 +1,10 @@
 """ 125. Valid Palindrome
+
+https://leetcode.com/problems/valid-palindrome/
+
+
+https://www.youtube.com/watch?v=jJXJ16kPFWg
+
 Easy
 
 A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
@@ -37,7 +43,9 @@ class Leet_125_ValidPalindrome:
         for c in s:
             if c.isalnum():  # what if isalnum function is not allowed to be used
                 newStr += c.lower()
-        return newStr == newStr[::-1] # what if extra memory can be avoided
+        reversenewStr = newStr[::-1]
+        print (f"Original string [{s}], modifified string [{newStr}], reversed string [{reversenewStr}]")
+        return newStr == reversenewStr # reversing the string
     
     #left and right Pointer solution
     def isPalindrome_1(self, s: str) -> bool:
@@ -60,9 +68,7 @@ class Leet_125_ValidPalindrome:
         #print (res)
         return res
 
-
-
-""" f (Leet_125_ValidPalindrome().isPalindrome("A man, a plan, a canal: Panama")):
+if (Leet_125_ValidPalindrome().isPalindrome("A man, a plan, a canal: Panama")):
     print("Yes")
 else:
     print("No")
@@ -72,13 +78,21 @@ if (Leet_125_ValidPalindrome().isPalindrome("race a car")):
 else:
     print("No")
 
-if (Leet_125_ValidPalindrome().isPalindrome(" ")):
+if (Leet_125_ValidPalindrome().isPalindrome("")):
     print("Yes")
 else:
-    print("No") """
+    print("No")
+if (Leet_125_ValidPalindrome().isPalindrome("12344321")):
+    print("Yes")
+else:
+    print("No")
+if (Leet_125_ValidPalindrome().isPalindrome("rotator")):
+    print("Yes")
+else:
+    print("No")
 
 
-
+print ("========================================================================")
 #print (Leet_125_ValidPalindrome().isPalindrome_1("A man, a plan, a canal: Panama"))
 if (Leet_125_ValidPalindrome().isPalindrome_1("A man, a plan, a canal: Panama")):
     print("Yes")
@@ -90,7 +104,15 @@ if (Leet_125_ValidPalindrome().isPalindrome_1("race a car")):
 else:
     print("No")
 
-if (Leet_125_ValidPalindrome().isPalindrome_1(" ")):
+if (Leet_125_ValidPalindrome().isPalindrome_1("")):
+    print("Yes")
+else:
+    print("No")
+if (Leet_125_ValidPalindrome().isPalindrome_1("12344321")):
+    print("Yes")
+else:
+    print("No")
+if (Leet_125_ValidPalindrome().isPalindrome_1("rotator")):
     print("Yes")
 else:
     print("No")

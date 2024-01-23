@@ -5,10 +5,12 @@ Youtube:
     https://www.youtube.com/watch?v=qe_pQCh09yU&list=RDQMLViDeLZ71KI&start_radio=1
 
 Medium
-Hint
-There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.
+
+There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. 
+You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.
 
     For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
+
 Return true if you can finish all courses. Otherwise, return false.
 
 Example 1:
@@ -50,13 +52,14 @@ class Solution:
         print (f"prerequisites : {prerequisites } and numCourses : {numCourses}")
         print ("")
         preRequisitesMap = { i:[] for i in range(numCourses)}
-        print (f"preRequisitesMap with empty list : {preRequisitesMap }")
+        print (f"preRequisitesMap with empty list : {preRequisitesMap}")
         print ("")
         for courses, preRequisites in prerequisites:
             preRequisitesMap[courses].append(preRequisites)
             #print (f"Enter the course {courses} and it's preRequisites {preRequisites} to preRequisitesMap {preRequisitesMap}")
         print (f"course to it's preRequisites in preRequisitesMap : {preRequisitesMap }")
         print ("")
+        output = []
         #VisitSet = all courses along the curr DFS path
         courseVisitSet =  set()  #Set in Python programming is an unordered collection data type that is iterable, mutable and has no duplicate elements. The major advantage of using a set, as opposed to a list, is that it has a highly optimized method for checking whether a specific element is contained in the set.
         print (f"Setting the set with name {courseVisitSet}")
@@ -84,6 +87,7 @@ class Solution:
             print (f"   course {course} removed in courseVisitSet {courseVisitSet}")
             preRequisitesMap[course] = [] # If course is visited and can be completed, it need to be update in the preRequisitesMap as empty list
             print (f"   Set the course {course} as empty list in preRequisitesMap {preRequisitesMap}")
+            output.append(course)
             return True
         
         for course in range(numCourses): #iterate over the numcourses (total number of course)
@@ -94,23 +98,34 @@ class Solution:
             if not callingDfsCOurse: #if dfs is False with not it returns False, so final return is False
                 print (f"DFS on course : {course} is returning False") 
                 return False
+        #print ("output = ", output)
         return True #Overall return is True
 
 if __name__=="__main__":
     leet_207 = Solution()
     prerequisites = [[1,0]]
     numCourses = 2
-    #print (leet_207.canFinish(numCourses, prerequisites))
+    print (leet_207.canFinish(numCourses, prerequisites))
+    print ("")
+    print ("=================================================")
+    prerequisites = [[1,0],[2,0],[3,1],[3,2]]
+    numCourses = 4
+    print (leet_207.canFinish(numCourses, prerequisites))
+    print ("")
+    print ("=================================================")
+    prerequisites = []
+    numCourses = 1
+    print (leet_207.canFinish(numCourses, prerequisites))
     print ("")
     print ("=================================================")
     prerequisites = [[1,0],[0,1]]
     numCourses = 2
-    #print (leet_207.canFinish(numCourses, prerequisites))
+    print (leet_207.canFinish(numCourses, prerequisites))
     print ("")
     print ("=================================================")
     prerequisites = [[0,1],[0,2],[1,3],[1,4],[3,4]]
     numCourses = 5
-    #print (leet_207.canFinish(numCourses, prerequisites))
+    print (leet_207.canFinish(numCourses, prerequisites))
     print ("")
     print ("=================================================")
     prerequisites = [[0,1],[0,2],[1,3],[1,4],[3,4],[4,1]]

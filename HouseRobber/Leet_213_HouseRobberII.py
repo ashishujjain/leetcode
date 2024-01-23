@@ -1,5 +1,9 @@
 """ 213. House Robber II
+
+https://leetcode.com/problems/house-robber-ii/description/
+
 https://www.youtube.com/watch?v=rWAJCfYYOvM
+https://www.youtube.com/watch?v=ucmqYGVGQK8&t=337s
 Medium
 
 Hint
@@ -27,14 +31,18 @@ Output: 3 """
 
 
 from typing import List
-
-
 class Leet_213_HouseRobberII:
     def rob(self, nums: List[int]) -> int:
-        return max(nums[0], self.rob_helper(nums[1:]), self.rob_helper(nums[:-1]))
+        print (f"nums = {nums}")
+        skipfirst=nums[1:]
+        print (f"skipfirst = {skipfirst}")
+        skiplast=nums[:-1]
+        print (f"skiplast = {skiplast}")
+        return max(nums[0], self.rob_helper(skiplast), self.rob_helper(skipfirst))
 
     def rob_helper(self, nums: List[int]) -> int:
         rob1 = rob2 = 0
+        # [rob1, rob2, n, n+1, n+2, ........]
         for n in nums:
             #print ("house has money:", n)
             temp = max (n + rob1, rob2)
@@ -47,3 +55,4 @@ class Leet_213_HouseRobberII:
 print(Leet_213_HouseRobberII().rob([2,3,2]))
 print(Leet_213_HouseRobberII().rob([1,2,3,1]))
 print(Leet_213_HouseRobberII().rob([1,2,3]))
+print(Leet_213_HouseRobberII().rob([1]))
